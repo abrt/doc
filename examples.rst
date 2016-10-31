@@ -220,3 +220,50 @@ ABRT.
 
 The code must be placed in a file in the ``/etc/libreport/events.d/`` directory.
 Packages often follow the ``${package name}_event.conf`` rule for these files.
+
+Ignore particular binaries on hook level in older version of ABRT
+-----------------------------------------------------------------
+
+Ignoring crashes of specific binaries on hook level was introduced in RHEL 7.3
+in ABRT version 2.1.11-36, in RHEL 6.8 in version 2.0.8-37, and in Fedora in
+ABRT version 2.8.1. Option ``IgnoredPaths`` in conf file
+``/etc/abrt/plugins/CCpp.conf``.
+
+Is it possible to ignore crashes on hook level even in older version of ABRT?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Yes, it is. You can write your own core_pattern script (man core(5)) which
+filters/ignores binaries and works as a wrapper for abrt-hook-ccpp which cannot
+do the filtering.
+
+Example how to do this:
+~~~~~~~~~~~~~~~~~~~~~~
+Create the core_pattern script (for instance /etc/my_abrt_ccpp_hook.sh) with
+following content:
+
+.. code:: bash
+
+    #!/bin/bash
+
+    # kernel.core_pattern = |/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t %e
+    #                                                    $1 $2 $3 $4 $5 $6 $7
+    # You want to filter %e - executable filename (without path prefix), so parameter $7
+
+    # Is it the particular binary you want to ignore?
+    if [[ $7 == "EXECUTABLE_YOU_WANT_TO_IGNORE" ]]
+    then
+        # Do what you want
+    else
+        # In other cases use ABRT's hook in standard way
+        cat /dev/stdin |/usr/libexec/abrt-hook-ccpp $1 $2 $3 $4 $5 $6 $7
+    fi
+
+Set the new kernel.core_pattern (basically, change /usr/libexec/abrt-hook-ccpp
+to /etc/my_abrt_ccpp_hook.sh):
+
+.. code:: bash
+
+    # sudo sysctl kernel.core_pattern
+    kernel.core_pattern = |/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t %e
+    # sudo sysctl kernel.core_pattern="|/etc/my_abrt_ccpp_hook.sh  %s %c %p %u %g %t %e"
+    kernel.core_pattern = |/etc/my_abrt_ccpp_hook.sh %s %c %p %u %g %t %e
