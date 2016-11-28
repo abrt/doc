@@ -29,9 +29,9 @@ What to do when ABRT is not able to catch the crash of my application?
 - If one of them is not running you can use the following command to
   restart both of them:
 
-  ``$ systemctl restart abrtd && systemctl status abrt-ccpp``
+  ``$ systemctl restart abrtd && systemctl restart abrt-ccpp``
 
-- If above doesn't help consult  ``journactl`` or ``/var/log/messages`` for error logs.
+- If the above doesn't help, consult ``journactl`` or ``/var/log/messages`` for error logs.
 
 - By default ABRT won't handle crashes produced by 3rd party
   (unpackaged) software, for this to work read `How to enable handling
