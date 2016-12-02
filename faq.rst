@@ -24,12 +24,12 @@ What to do when ABRT is not able to catch the crash of my application?
   - ``abrtd``
   - ``abrt-ccpp``
 
-  ``$ systemctl status abrtd && systemctl status abrt-ccpp``
+  ``$ systemctl status abrtd abrt-ccpp``
 
 - If one of them is not running you can use the following command to
   restart both of them:
 
-  ``$ systemctl restart abrtd && systemctl restart abrt-ccpp``
+  ``$ sudo systemctl restart abrtd abrt-ccpp``
 
 - If the above doesn't help, consult ``journactl`` or ``/var/log/messages`` for error logs.
 
