@@ -108,6 +108,28 @@ to python interpreter::
         python -S file.py
 
 
+
+.. _oopswatcher:
+
+Oops watcher
+------------
+
+Kernel oopses are detected by watcher ``abrt-dump-journal-oops``, typicaly this
+process runs as a daemon and watches systemd-journal. When kernel oops logs
+appears, watcher extracts them and creates problem dir, which is further
+processed by post-create event handler for type Kerneloops.
+
+.. _xorgwatcher:
+
+Xorg watcher
+------------
+
+Xorg crashes are detected by watcher ``abrt-dump-journal-xorg``. Mechanism is
+same as in oops watcher, systemd-journal is watched and Xorg crashes are
+extracted in time of their occurence. In addition xorg watcher can be
+configured to search for next Xorg crashes, config file is located in
+``/etc/abrt/plugins/xorg.conf``.
+
 .. _eventdesign:
 
 Events
