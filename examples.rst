@@ -65,8 +65,9 @@ recipient) to ``/etc/libreport/plugins/mailx.conf``:
 
 ::
 
-    EmailFrom="ABRT Daemon <DoNotReply>"
-    EmailTo="devel@lists.project.org"
+    Subject = [abrt] a crash has been detected
+    EmailFrom = ABRT Daemon <DoNotReply>
+    EmailTo = devel@lists.project.org
 
 
 And the updated default configuration lines follow:
