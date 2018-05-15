@@ -26,6 +26,8 @@ Upon installation, ABRT and libreport place their respective configuration files
 ``/etc/abrt/plugins/``
     keeps configuration files used to override the default setting of ABRT's services and programs. For more information on some specific configuration files refer to :ref:`abrtspecific`.
 
+The configuration files expect Key-Value pairs separated by an equal sign. Quoting of the values is not supported.
+
 
 .. _abrtspecific:
 
