@@ -67,10 +67,10 @@ appropriate SELinux boolean allowing ABRT to write into the ``public_content_rw_
 
      setsebool -P abrt_anon_write 1
 
-* ``MaxCrashReportsSize = size_in_megabytes``
+* ``MaxCrashReportsSize = size_in_mebibytes``
 
-This option sets the amount of storage space, in megabytes, used by ABRT to store all problem information from all users.
-The default setting is 1000 MB. Once the quota specified here has been met, ABRT will continue catching problems,
+This option sets the amount of storage space, in mebibytes, used by ABRT to store all problem information from all users.
+The default setting is 5000 MiB. Once the quota specified here has been met, ABRT will continue catching problems,
 and in order to make room for the new crash dumps, it will delete the oldest and largest ones.
 
 * ``DumpLocation = /var/spool/abrt``
