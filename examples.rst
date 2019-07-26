@@ -238,7 +238,7 @@ filters/ignores binaries and works as a wrapper for abrt-hook-ccpp which cannot
 do the filtering.
 
 Example how to do this:
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 Create the core_pattern script (for instance /etc/my_abrt_ccpp_hook.sh) with
 following content:
 

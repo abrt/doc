@@ -34,11 +34,11 @@ To ensure the problem can be reported to Bugzilla via report-gtk or
 report-cli you have to add the following keys with the following contents:
 
 * ``duphash`` - `(string)` duplicate hash, hash is placed in Bugzilla's
-``Whiteboard`` field in format ``abrt_hash:$duphash``. Content of ``duphash``
-is for C/C++ a sha1 of joined names of top 6 functions on the stacktrace. For
-Python exception is a sha1 of the stacktrace.
-* ``uuid`` - `(string)` local identifier of the problem. The content can be the
-same as for ``duphash``.
+  ``Whiteboard`` field in format ``abrt_hash:$duphash``. Content of ``duphash`` is
+  for C/C++ a sha1 of joined names of top 6 functions on the stacktrace. For Python
+  exception is a sha1 of the stacktrace.
+* ``uuid`` - `(string)` local identifier of the problem. The content can be the same
+  as for ``duphash``.
 
 Optionally, server accepts other elements listed in :ref:`elements`.
 
