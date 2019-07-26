@@ -478,61 +478,65 @@ events provided by the standard installation of ABRT:
 Workflow configuration
 ----------------------
 
-report-gtk and report-cli are tools that reports application crashes and other
-problems caught by abrtd daemon, or created by other programs using libreport.
-report-gtk and report-cli start EVENTs. There are two ways to specify an EVENTs
-to be performed. It can be specified either as a command line parameters
-(option -e EVENT) or in workflow files which are placed in
-``/usr/share/libreport/workflow/``. Every EVENT which is used in workflow must
-have defined the relevant xml file which is placed in
-``/usr/share/libreport/events``. This xml configuration file format is
-described in the following man page::
+report-gtk and report-cli are tools that report application crashes and other
+problems caught by abrtd daemon, or created by other programs using libreport. To do
+so, they invoke so called *EVENTs*. There are two ways to specify an EVENT to be
+performed. Either it can be specified as a command line argument (option
+``-e EVENT``) to report-gtk/report-cli, or it can be defined in a *workflow file*
+located in ``/usr/share/libreport/workflows/``. Which of these workflow files will be
+used is defined in *workflow configuration files* in ``/etc/libreport/workflows.d/``.
 
-        man report_event.conf
+Every EVENT which is used in a workflow must have its corresponding XML description
+file in ``/usr/share/libreport/events/``. The format of these files is described in
+the ``report_event.conf(5)`` man page.
 
-Which of these workflow files will be used is defined in workflow configuration files
-placed in ``/etc/libreport/workflows.d/``.
-
-workflow file
+Workflow file
 ^^^^^^^^^^^^^
-Each file has XML formatting with the following DTD::
 
-        <!ELEMENT workflow    (name+,description+,priority?,events*)>
-        <!ELEMENT name        (#PCDATA)>
-        <!ATTLIST name         xml:lang CDATA #IMPLIED>
-        <!ELEMENT description (#PCDATA)>
-        <!ATTLIST description  xml:lang CDATA #IMPLIED>
-        <!ELEMENT priority =  (#PCDATA)>
-        <!ELEMENT events =    (event)+>
-        <!ELEMENT event =     (#PCDATA)>
+Each XML file in ``/usr/share/libreport/workflows/`` must conform to the following DTD:
+
+.. code-block:: dtd
+
+    <!ELEMENT workflow    (name+,description+,priority?,events*)>
+    <!ELEMENT name        (#PCDATA)>
+    <!ATTLIST name         xml:lang CDATA #IMPLIED>
+    <!ELEMENT description (#PCDATA)>
+    <!ATTLIST description  xml:lang CDATA #IMPLIED>
+    <!ELEMENT priority =  (#PCDATA)>
+    <!ELEMENT events =    (event)+>
+    <!ELEMENT event =     (#PCDATA)>
 
 ``name``
-    User visible name
+    User-facing name of the workflow.
 
 ``description``
-    User visible description
+    User-facing description of the workflow.
 
 ``priority``
-    Priority of the workflow. Higher number means a more visible place in
-    UI. If not provided, 0 is used.  The value is signed integer.
+    Priority of the workflow. Higher number means a more visible place in the user
+    interface. If none is provided, 0 is used. The value is a signed integer.
 
 ``events``
-    List of executed events
+    List of events executed in the workflow.
 
 ``event``
-    Name of event. If event is not applicable on the problem data or if it
-    is not defined then process continues with next event sibling.
+    Name of the event to be executed. You may also use a wildcard (``*``) at the end
+    of the name to select multiple events with a common prefix. If an event is not
+    applicable to the problem data or if it is not defined, the process continues
+    with next event sibling.
 
-workflow configuration file
+Workflow configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The configuration file contains rules. Each rule starts with a line with a
-non-space leading character. Each rule consists of two parts, a name of EVENT
-and a CONDITION in following format::
+The configuration file contains rules governing which of the workflows shall be
+executed under the given conditions. Each rule starts with a line with a non-space
+leading character. Each rule consists of two parts, the name of a workflow and
+an optional condition in following format::
 
     EVENT=<WORKFLOW_NAME> [CONDITION]
 
-The CONDITION part contains conditions in one of the following forms::
+The latter part consists of a space-separated list of conditions in one of the
+following forms::
 
     VAR=VAL,
 
@@ -542,36 +546,42 @@ The CONDITION part contains conditions in one of the following forms::
 
 where:
 
-* ``VAR`` is a problem data directory
-        element (such as ``executable``, ``package``, ``hostname``, etc.),
+* ``VAR`` is a problem data directory element (such as ``executable``, ``package``,
+  ``hostname``, etc. -- see :ref:`elements` for more),
 
 * ``VAL`` is a problem data element, and
 
 * ``REGEX`` is a regular expression.
 
-steps while loading the workflow
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Loading procedure
+^^^^^^^^^^^^^^^^^
 
-report-gtk or report-cli looks to the directory ``/etc/libreport/workflows.d/`` and
-goes trough all configuration files and all rules. All EVENT's names which
-satisfies the condition in these files are used as name of workflow (``<WORKFLOW_NAME>`` +
-'.xml') files placed in ``/usr/share/libreport/workflow/``. If there is
-only one workflow which corresponds with EVENTs names the reporter goes trough
-this file and execute every EVENTs which are defined in this workflow. If there
-are more then one workflows which corresponds with EVENTs names the reporter
-gives users a choose which one he want to use.
+report-gtk or report-cli looks into the ``/etc/libreport/workflows.d/`` directory and
+goes trough all rules in each of the configuration files, checking if the specified
+conditions of each rule are satisfied.
 
-To better understand the issue here is an example of creating workflow for
-mailx. The first step is a create a workflow configuration file in
-``/etc/libreport/workflows.d/`` with following content::
+If there is only one workflow whose conditions are satisfied, its specification is
+loaded from ``/usr/share/libreport/workflows/<WORKFLOW_NAME>.xml`` and each of its
+events is executed. If multiple workflows match the conditions, the user is given
+a choice wich of them should be executed.
+
+Example workflow
+^^^^^^^^^^^^^^^^
+
+To illustrate the process, we provide an example of creating a workflow for mailx,
+the POSIX mail utility. The first step is to create a workflow configuration file in
+``/etc/libreport/workflows.d/`` with the following content::
 
     EVENT=workflow_mailx analyzer=CCpp
 
-It means that when analyzer is equal to CCpp, reporter trying to find
-``workflow_mailx.xml`` workflow in ``/usr/share/libreport/workflow/``.
+This instructs the reporter to look for a ``workflow_mailx.xml`` file in
+``/usr/share/libreport/workflow/`` whenever the analyzer is CCpp (the crash analyzer
+for C and C++).
 
-The other step is to create workflow called ``workflow_mailx.xml`` for example with
-following content::
+In the second step, we create the required workflow file, ``workflow_mailx.xml``,
+with the following content:
+
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <workflow>
@@ -584,10 +594,14 @@ following content::
         </events>
     </workflow>
 
-It means the report-gtk or report-cli runs the event report_Mailx.
-The other step is to create the EVENT configuration file ``report_Mailx.xml``
-which corresponds with the ``report_Mailx`` EVENT from the ``workflow_mailx.xml``
-configuration file described above. The content of this file may be as follows::
+It instructs the reporter (report-gtk or report-cli) to run the event
+``report_Mailx`` as the only step of this workflow.
+
+The third step is to create the EVENT configuration file ``report_Mailx.xml`` which
+corresponds to the ``report_Mailx`` EVENT from the ``workflow_mailx.xml``
+configuration file described above. The content of this file may be as follows:
+
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8" ?>
     <event>
