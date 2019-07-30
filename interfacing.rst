@@ -33,37 +33,37 @@ Mandatory keys:
 To ensure the problem can be reported to Bugzilla via report-gtk or
 report-cli you have to add the following keys with the following contents:
 
-* ``duphash`` - `(string)` duplicate hash, hash is placed in Bugzilla's
-  ``Whiteboard`` field in format ``abrt_hash:$duphash``. Content of ``duphash`` is
-  for C/C++ a sha1 of joined names of top 6 functions on the stacktrace. For Python
-  exception is a sha1 of the stacktrace.
-* ``uuid`` - `(string)` local identifier of the problem. The content can be the same
+* ``duphash`` — `(string)` duplicate hash. The hash is placed in Bugzilla's
+  ``Whiteboard`` field in the format ``abrt_hash:$duphash``. For C/C++, the content
+  of ``duphash`` is the SHA-1 digest of the concatenation of the names of top six
+  functions on the stacktrace. For Python exceptions, it is the SHA-1 digest of the
+  stacktrace.
+* ``uuid`` — `(string)` local identifier of the problem. The content can be the same
   as for ``duphash``.
 
-Optionally, server accepts other elements listed in :ref:`elements`.
+Optionally, the server accepts other elements listed in :ref:`elements`.
 
-If there's no error server will respond with::
+If there's no error, the server responds with::
 
         HTTP/1.1 201 Created\r\n\r\n
 
 or ``400`` status code in case of error.
 
-:ref:`pyhook` may serve as an example of socket API usage.
+:ref:`pyhook` may serve as an example of the socket API usage.
 
 .. _dbusapi:
 
 DBus API
 --------
 
-Documentation for DBus API ``org.freedesktop.Problems`` is available
-as part of ``abrt-dbus`` package or online
-at http://jfilak.fedorapeople.org/ProblemsAPI/re01.html.
+Documentation for the DBus API at ``org.freedesktop.problems`` is available as part
+of the ``abrt-dbus`` package or online at
+http://jfilak.fedorapeople.org/ProblemsAPI/re01.html.
 
 .. _pythonapi:
 
 Python API
 ----------
 
-Documentation for Python API is available in ``man abrt-python``
-(part of ``abrt-python`` package) or online
-at http://rmarko.fedorapeople.org/abrt-python/
+Documentation for the Python API is available in the ``python3-abrt(5)`` man page
+(part of the ``python3-abrt`` package).
