@@ -94,16 +94,17 @@ repositories and are downloaded and unpacked to the ABRT debuginfo directory.
 Python hook
 -----------
 
-Packages ``abrt-addon-python`` and ``abrt-addon-python3`` install
-custom exception handler for Python 2 and Python 3 applications.
+The ``python3-abrt-addon`` package provides an exception handler for Python 3
+applications.
 
-Python interpreter automatically imports ``abrt.pth`` file installed
-in ``/usr/lib64/python2.7/site-packages/``. This file imports ``abrt_exception_handler.py``
-that overrides Python's default ``sys.excepthook`` with custom handler
-which forwards unhandled exceptions to ``abrtd`` via its :ref:`socketapi`.
+The Python interpreter automatically imports the ``abrt.pth`` file installed in
+``/usr/lib64/python3.7/site-packages/``. This file in turn imports
+``abrt_exception_handler.py`` which overrides Python's default ``sys.excepthook``
+with a custom handler that forwards unhandled exceptions to ``abrtd`` via its
+:ref:`socketapi`.
 
-Automatic import of site specific modules can be disabled by passing ``-S`` option
-to python interpreter::
+Automatic import of site-specific modules can be disabled by passing the ``-S``
+option to the Python interpreter::
 
         python -S file.py
 
