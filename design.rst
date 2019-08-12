@@ -262,6 +262,6 @@ Supported values for ``type`` element:
 
 .. rubric:: Footnotes
 
-.. [#procfs] http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/proc.txt
-.. [#corepattern] http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/sysctl/kernel.txt
-.. [#inotify] http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/inotify.txt
+.. [#procfs] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/filesystems/proc.txt
+.. [#corepattern] https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#core-pattern
+.. [#inotify] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/filesystems/inotify.txt
