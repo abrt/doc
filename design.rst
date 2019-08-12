@@ -43,7 +43,7 @@ of the Linux kernel [#procfs]_.
 
 To enable C/C++ hook use::
 
-        systemctl abrt-ccpp start
+        systemctl enable --now abrt-ccpp
 
 .. _core_pattern:
 
