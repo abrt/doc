@@ -150,8 +150,8 @@ However, the ABRT core dumper helper can be turned off and the ABRT
 native programs.
 
 Everything you need to do is to disable `abrt-ccpp.service` which replaces the
-core_pattern configured via `sysctl` with the ABRT core pattern helper. If
-the service is running the core_pattern should start with
+`core_pattern` configured via `sysctl` with the ABRT core pattern helper. If
+the service is running, the `core_pattern` should start with
 ``|/usr/libexec/abrt-hook-ccpp``.
 
 .. code:: bash
@@ -159,10 +159,10 @@ the service is running the core_pattern should start with
     systemctl stop abrt-ccpp.service
     systemctl disable abrt-ccpp.service
 
-Once you stop and disable the abrt-ccpp.service the core_pattern help should
-start with ``|/usr/lib/systemd/systemd-coredump``. If it does not, please
-check if the file ``/usr/lib/sysctl.d/50-coredump.conf`` exist and ensure that
-there is no other file containing ``kernel.core_pattern=`` (sysctl.d(5)).
+Once you stop and disable `abrt-ccpp.service`, the `core_pattern` variable should
+start with ``|/usr/lib/systemd/systemd-coredump``. If it does not, please check if
+the file ``/usr/lib/sysctl.d/50-coredump.conf`` exist and ensure that there is no
+other file setting ``kernel.core_pattern`` (see ``man 5 sysctl.d``).
 
 The last two things you need to do is to enable and start
 `abrt-journal-core.service`.
@@ -233,14 +233,14 @@ ABRT version 2.8.1. Option ``IgnoredPaths`` in conf file
 Is it possible to ignore crashes on hook level even in older version of ABRT?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Yes, it is. You can write your own core_pattern script (man core(5)) which
-filters/ignores binaries and works as a wrapper for abrt-hook-ccpp which cannot
-do the filtering.
+Yes, it is. You can write your own `core_pattern` script which filters/ignores
+binaries and works as a wrapper for abrt-hook-ccpp which cannot do the filtering.
+For more deatils, see the kernel documentation [#corepattern]_.
 
 Example how to do this:
 ~~~~~~~~~~~~~~~~~~~~~~~
-Create the core_pattern script (for instance /etc/my_abrt_ccpp_hook.sh) with
-following content:
+Create the `core_pattern` script (for instance ``/etc/my_abrt_ccpp_hook.sh``) with
+following contents:
 
 .. code:: bash
 
@@ -259,12 +259,14 @@ following content:
         cat /dev/stdin |/usr/libexec/abrt-hook-ccpp $1 $2 $3 $4 $5 $6 $7
     fi
 
-Set the new kernel.core_pattern (basically, change /usr/libexec/abrt-hook-ccpp
-to /etc/my_abrt_ccpp_hook.sh):
+Set the new `kernel.core_pattern` using `sysctl` (basically, change
+``/usr/libexec/abrt-hook-ccpp`` to ``/etc/my_abrt_ccpp_hook.sh``):
 
 .. code:: bash
 
-    # sudo sysctl kernel.core_pattern
+    # sysctl kernel.core_pattern
     kernel.core_pattern = |/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t %e
-    # sudo sysctl kernel.core_pattern="|/etc/my_abrt_ccpp_hook.sh  %s %c %p %u %g %t %e"
+    # sysctl kernel.core_pattern="|/etc/my_abrt_ccpp_hook.sh  %s %c %p %u %g %t %e"
     kernel.core_pattern = |/etc/my_abrt_ccpp_hook.sh %s %c %p %u %g %t %e
+
+.. [#corepattern] https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#core-pattern
