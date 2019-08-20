@@ -1,6 +1,10 @@
 ABRT project documentation
 ==========================
 
+.. image:: https://readthedocs.org/projects/abrt/badge/?version=latest
+:target: https://abrt.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
+
 Requirements
 ------------
 
