@@ -2,8 +2,8 @@ ABRT project documentation
 ==========================
 
 .. image:: https://readthedocs.org/projects/abrt/badge/?version=latest
-:target: https://abrt.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+   :target: https://abrt.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 Requirements
 ------------
@@ -18,3 +18,4 @@ Building
 ``make watch``
     to build continually on source code changes
     (requires ``inotifywait`` from ``inotify-tools`` package)
+
