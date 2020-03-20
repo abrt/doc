@@ -81,13 +81,13 @@ unpack the required debuginfo packages through
 utility.
 
 Upon a new core dump file detection ABRT generates a list of build-ids
-(``XXYYYY..YYYY``) using ``eu-unstrip -n --core=coredump``. When a user decides
-to report the core dump file, the ABRT debuginfo tool goes through that list
-and remembers those build-ids for which
-``/usr/lib/debug/.build-id/XX/YYYY..YYYY.debug`` file does not exist in the
-system root directory or in the ABRT debuginfo directory. Finally, packages
-that provides the non-existing debug files are looked up in ``*debug*``
-repositories and are downloaded and unpacked to the ABRT debuginfo directory.
+(``XXYYY..YYY``) using ``eu-unstrip -n --core=coredump``. When a user decides to
+report the core dump file, the ABRT debuginfo tool goes through that list and
+remembers those build-ids for which the file ``XX/YYY..YYY.debug`` exists
+neither in the system directories (``/usr/lib/debug/.build-id`` or
+``/usr/lib/.build-id``) or in the ABRT debuginfo directory. Finally, packages
+that provide the debug files are looked up in ``*debug*`` repositories,
+downloaded and unpacked to the ABRT debuginfo directory.
 
 .. _pyhook:
 
