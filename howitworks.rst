@@ -117,8 +117,7 @@ retrace server
 """"""""""""""
 
 The retrace server provides a core dump analysis and backtrace
-generation service over a network using HTTP protocol. Its functionality
-is currently being merged to faf.
+generation service over a network using HTTP protocol.
 
 Privacy
 -------
