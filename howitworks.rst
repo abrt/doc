@@ -10,7 +10,7 @@ the data in ``/var/tmp/abrt`` and runs a chain of events that
 for example collect more data about the system, produce backtrace
 from core dump or notifies a user. This process is followed by
 automatic or manual reporting to various supported targets like bugzilla
-or ABRT server (:ref:`faf`).
+or ABRT Analytics (:ref:`faf`).
 
 Reporting
 ---------
@@ -19,9 +19,9 @@ Currently, typical desktop reporting work-flow consists of generating so called
 :ref:`ureport` (micro report) designed to be completely anonymous so it can be sent
 and processed automatically avoiding costly bugzilla queries and manpower.
 
-The ABRT server in this scenario works like a first line of defense — collecting
-massive amounts of similar reports and responding with tracker URLs
-in case of known problems.
+The ABRT Analytics (also known as ABRT server in the past) in this scenario works
+like a first line of defense — collecting massive amounts of similar reports and
+responding with tracker URLs in case of known problems.
 
 If user is lucky enough to hit a unique issue not known by faf,
 reporting chain continues with reporting to bugzilla, more complex process
@@ -81,9 +81,9 @@ via different paths like email, bugzilla, faf, scp upload..
 faf
 """
 
-Crash collecting server, also known as ABRT server. Provides
-accurate statistics of incoming reports and acts as a proxy in front
-of bugzilla (or any other issue tracker) when it comes to
+Crash collecting server, also known as ABRT Analytics (or ABRT server in the
+past). Provides accurate statistics of incoming reports and acts as a proxy in
+front of bugzilla (or any other issue tracker) when it comes to
 automatic reporting of crashes. It's designed to receive
 anonymous :ref:`μReports <ureport>` and to find clusters of similar reports
 among them. For reports that are known, user receives fast response
