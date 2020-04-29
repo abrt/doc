@@ -146,7 +146,7 @@ A problem life cycle is driven by events in ABRT. For example:
 
 When a problem is detected and its defining data is stored,
 the problem is processed by running events on the problem's data directory.
-For event configuration how-to, refer to .
+For event configuration how-to, refer to :ref:`eventconf`.
 
 Standard ABRT installation currently supports several default
 events that can be selected and used during problem reporting process.
