@@ -84,7 +84,7 @@ Upon a new core dump file detection ABRT generates a list of build-ids
 (``XXYYY..YYY``) using ``eu-unstrip -n --core=coredump``. When a user decides to
 report the core dump file, the ABRT debuginfo tool goes through that list and
 remembers those build-ids for which the file ``XX/YYY..YYY.debug`` exists
-neither in the system directories (``/usr/lib/debug/.build-id`` or
+either in the system directories (``/usr/lib/debug/.build-id`` or
 ``/usr/lib/.build-id``) or in the ABRT debuginfo directory. Finally, packages
 that provide the debug files are looked up in ``*debug*`` repositories,
 downloaded and unpacked to the ABRT debuginfo directory.
