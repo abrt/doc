@@ -15,7 +15,7 @@ Look for failures in system log::
 
 or if your system doesn't support journal::
 
-        grep abrt /vart/log/messages
+        grep abrt /var/log/messages
 
 Possible reasons for abrt not handling crashes might include:
  * ``abrtd`` not running due to permission errors
