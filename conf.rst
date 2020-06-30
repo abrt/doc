@@ -449,12 +449,6 @@ events provided by the standard installation of ABRT:
     It is defined in the ``/etc/libreport/events.d/print_event.conf``
     configuration file.
 
-``report_RHTSupport`` — Red Hat Customer Support
-    Reports problems to the Red Hat Technical Support system.
-    This possibility is intended for users of Red Hat Enterprise Linux.
-    It is defined in the ``/etc/libreport/events.d/rhtsupport_event.conf``
-    configuration file.
-
 ``report_Mailx`` — Mailx
     Sends a problem report via the ``mailx`` utility to a specified email address.i
     It is defined in the ``/etc/libreport/events.d/mailx_event.conf``
@@ -704,8 +698,6 @@ files:
 +-----------------------------------------------+---------------------------------+----------------------------------+
 | Collect GConf configuration                   | collect\_GConf.xml              | collect\_GConf.conf              |
 +-----------------------------------------------+---------------------------------+----------------------------------+
-| Collect Smolt profile                         | collect\_Smolt.xml              | collect\_Smolt.conf              |
-+-----------------------------------------------+---------------------------------+----------------------------------+
 | Collect system-wide vim configuration files   | collect\_vimrc\_system.xml      | collect\_vimrc\_system.conf      |
 +-----------------------------------------------+---------------------------------+----------------------------------+
 | Collect your vim configuration files          | collect\_vimrc\_user.xml        | collect\_vimrc\_user.conf        |
@@ -717,8 +709,6 @@ files:
 | Kerneloops.org                                | report\_Kerneloops.xml          | report\_Kerneloops.conf          |
 +-----------------------------------------------+---------------------------------+----------------------------------+
 | Mailx                                         | report\_Mailx.xml               | report\_Mailx.conf               |
-+-----------------------------------------------+---------------------------------+----------------------------------+
-| Red Hat Customer Support                      | report\_RHTSupport.xml          | report\_RHTSupport.conf          |
 +-----------------------------------------------+---------------------------------+----------------------------------+
 | Report uploader                               | report\_Uploader.xml            | report\_Uploader.conf            |
 +-----------------------------------------------+---------------------------------+----------------------------------+
