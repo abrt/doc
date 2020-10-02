@@ -153,10 +153,10 @@ following commands (depending on your desktop environment)::
         yum install fros-gnome
         yum install fros-recordmydesktop
 
-Why FAF collects tainted kernel oopses?
+Why ABRT Analytics collects tainted kernel oopses?
 ---------------------------------------
 
-FAF collects tainted oopses because each received oops is forwarded 
+ABRT Analytics collects tainted oopses because each received oops is forwarded
 to http://oops.kernel.org/ and kernel people want to
 see **every** oops and **not only untainted** ones.
 

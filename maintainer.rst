@@ -67,7 +67,7 @@ you can try to crash it by sending it a `SIGSEGV` signal
         kill -SIGSEGV $( pidof yourapp )
 
 Abrt should catch the crash and produce a problem directory correctly.
-It should be possible to report the crash to faf and bugzilla.
+It should be possible to report the crash to ABRT Analytics and bugzilla.
 
 Using custom bugzilla template
 ------------------------------
