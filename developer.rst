@@ -24,7 +24,7 @@ Nightly builds
 --------------
 
 Nightly builds and repositories for Fedora and RHEL
-are avaialable at http://rmarko.fedorapeople.org/
+are avaialable at https://copr.fedorainfracloud.org/groups/g/abrt/coprs/
 
 Ignoring common functions on the stack
 --------------------------------------
