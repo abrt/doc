@@ -10,7 +10,7 @@ the data in ``/var/tmp/abrt`` and runs a chain of events that
 for example collect more data about the system, produce backtrace
 from core dump or notifies a user. This process is followed by
 automatic or manual reporting to various supported targets like bugzilla
-or ABRT Analytics (:ref:`faf`).
+or ABRT Analytics (:ref:`analytics`).
 
 Reporting
 ---------
@@ -23,7 +23,7 @@ The ABRT Analytics (also known as ABRT server in the past) in this scenario work
 like a first line of defense — collecting massive amounts of similar reports and
 responding with tracker URLs in case of known problems.
 
-If user is lucky enough to hit a unique issue not known by faf,
+If user is lucky enough to hit a unique issue not known by ABRT Analytics,
 reporting chain continues with reporting to bugzilla, more complex process
 which requires user having a bugzilla account and going through numerous steps
 including verification that the report doesn't contain sensitive data.
@@ -74,11 +74,11 @@ libreport
 """""""""
 
 Libraries providing an API for reporting problems
-via different paths like email, bugzilla, faf, scp upload..
+via different paths like email, bugzilla, ABRT Analytics, scp upload..
 
-.. _faf:
+.. _analytics:
 
-faf
+ABRT Analytics
 """
 
 Crash collecting server, also known as ABRT Analytics (or ABRT server in the
@@ -87,7 +87,7 @@ front of bugzilla (or any other issue tracker) when it comes to
 automatic reporting of crashes. It's designed to receive
 anonymous :ref:`μReports <ureport>` and to find clusters of similar reports
 among them. For reports that are known, user receives fast response
-containing links to faf's problem page, issue tracker or an entry
+containing links to ABRT Analytics's problem page, issue tracker or an entry
 from knowledge base, that contains number of well-known issues like
 usage of proprietary kernel modules or browser crashes caused by
 unsupported modules.
