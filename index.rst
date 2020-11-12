@@ -15,6 +15,7 @@ Quick links
 * IRC channel: #abrt @ irc.freenode.net
 * `Fedora problem tracker <https://retrace.fedoraproject.org/faf/summary/>`_
 * `RHEL problem tracker <http://faf-report.redhat.com/summary/>`_
+* `ABRT blog <https://abrt.github.io/>`_
 
 
 Contents
