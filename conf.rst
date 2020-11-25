@@ -130,7 +130,7 @@ Configuring ABRT to Detect a Kernel Panic
 ABRT can detect a kernel panic using the ``abrt-vmcore`` service, which is provided by the ``abrt-addon-vmcore`` package.
 The service starts automatically on system boot and searches for a core dump file in the ``/var/crash/`` directory.
 If a core dump file is found, ``abrt-vmcore`` creates the problem data directory in the ``/var/spool/abrt/``
-directory and moves the core dump file to the newly created problem data directory.
+directory and copies the core dump file to the newly created problem data directory.
 After the ``/var/crash/`` directory is searched through, the service is stopped until the next system boot.
 
 To configure ABRT to detect a kernel panic, perform the following steps:
