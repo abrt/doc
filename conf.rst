@@ -49,7 +49,7 @@ The following configuration directives are supported in the ``/etc/abrt/abrt.con
 
 * ``WatchCrashdumpArchiveDir = /var/spool/abrt-upload``
 
-This directive is commented out by default. Enable it if you want `abrtd` to auto-unpack crashdump tarball archives (`.tar.gz`)
+Enable this directive if you want `abrtd` to auto-unpack crashdump tarball archives (`.tar.gz`)
 which are located in the specified directory. In the example above, it is the ``/var/spool/abrt-upload/`` directory.
 Whichever directory you specify in this directive, you must ensure that it exists and it is writable for abrtd.
 The ABRT daemon will not create it automatically.
@@ -75,7 +75,7 @@ and in order to make room for the new crash dumps, it will delete the oldest and
 
 * ``DumpLocation = /var/spool/abrt``
 
-This directive is commented out by default. It specifies the location where problem data directories are created and in which
+This directive specifies the location where problem data directories are created and in which
 problem core dumps and all other problem data are stored.
 The default location is set to the ``/var/spool/abrt`` directory.
 Whichever directory you specify in this directive, you must ensure that it exists and it is writable for `abrtd`.
