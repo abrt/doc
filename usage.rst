@@ -23,7 +23,7 @@ Example output::
         package:        will-crash-0.7-4.fc21
         uid:            1000 (mhabrnal)
         count:          1
-        Directory:      /var/tmp/abrt/ccpp-2014-09-17-02:51:07-5368
+        Directory:      /var/spool/abrt/ccpp-2014-09-17-02:51:07-5368
 
         id 58101e309c3e473d49b1a7d60868ab7023a62dd6
         reason:         will_abort killed by SIGABRT
@@ -32,7 +32,7 @@ Example output::
         package:        will-crash-0.7-4.fc21
         uid:            1000 (mhabrnal)
         count:          1
-        Directory:      /var/tmp/abrt/ccpp-2014-09-17-02:51:07-5368
+        Directory:      /var/spool/abrt/ccpp-2014-09-17-02:51:07-5368
         Reported:       cannot be reported
 
         id afdf8c42ddeb324b975f3510f6e976085b46c4fe
@@ -42,7 +42,7 @@ Example output::
         package:        will-crash-0.7-4.fc21
         uid:            1000 (mhabrnal)
         count:          1
-        Directory:      /var/tmp/abrt/ccpp-2014-09-16-23:12:09-4265
+        Directory:      /var/spool/abrt/ccpp-2014-09-16-23:12:09-4265
         Reported:       https://retrace.fedoraproject.org/faf/reports/bthash/102f484335e2df215da7a92d962d017e7d9edcc9
                         https://bugzilla.redhat.com/show_bug.cgi?id=1124867
 

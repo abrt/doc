@@ -6,8 +6,8 @@ Frequently asked questions
 Where does ABRT store the crashes?
 ----------------------------------
 
-- ``/var/tmp/abrt``
-- Prior to Fedora 18 these were stored in ``/var/spool/abrt``
+- ``/var/spool/abrt``
+- Prior to Fedora 18 these were stored in ``/var/tmp/abrt``
 
 What type of crashes can ABRT handle?
 -------------------------------------

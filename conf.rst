@@ -77,7 +77,7 @@ and in order to make room for the new crash dumps, it will delete the oldest and
 
 This directive is commented out by default. It specifies the location where problem data directories are created and in which
 problem core dumps and all other problem data are stored.
-The default location is set to the ``/var/tmp/abrt`` directory.
+The default location is set to the ``/var/spool/abrt`` directory.
 Whichever directory you specify in this directive, you must ensure that it exists and it is writable for `abrtd`.
 If you change the default value of this option, be aware that in order to ensure proper functionality of ABRT,
 this directory **must not** be the same as the directory specified for the ``WatchCrashdumpArchiveDir`` option.
@@ -129,7 +129,7 @@ Configuring ABRT to Detect a Kernel Panic
 
 ABRT can detect a kernel panic using the ``abrt-vmcore`` service, which is provided by the ``abrt-addon-vmcore`` package.
 The service starts automatically on system boot and searches for a core dump file in the ``/var/crash/`` directory.
-If a core dump file is found, ``abrt-vmcore`` creates the problem data directory in the ``/var/tmp/abrt/``
+If a core dump file is found, ``abrt-vmcore`` creates the problem data directory in the ``/var/spool/abrt/``
 directory and moves the core dump file to the newly created problem data directory.
 After the ``/var/crash/`` directory is searched through, the service is stopped until the next system boot.
 
@@ -150,7 +150,7 @@ To configure ABRT to detect a kernel panic, perform the following steps:
 #. Reboot the system for the changes to take effect.
 
 Unless ABRT is configured differently, problem data for any detected kernel panic is now stored
-in the ``/var/tmp/abrt/`` directory and can be further processed by ABRT just as any other detected kernel oops.
+in the ``/var/spool/abrt/`` directory and can be further processed by ABRT just as any other detected kernel oops.
 
 
 Desktop Session Autoreporting
@@ -190,7 +190,7 @@ during the desktop session's lifetime.
 
 Uploading uReports requires a writeable problem directory and in order to make
 the reporting more automatic and less confusing, ABRT might move the problem
-directory from the system dump location (usually ``/var/tmp/abrt/`` directory) to
+directory from the system dump location (usually ``/var/spool/abrt/`` directory) to
 ``$HOME/.cache/abrt/spool/`` directory without asking the user for a permission to do
 so. However, ABRT moves the directories only if the user has no rights for writing
 to the system dump location.
