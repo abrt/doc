@@ -6,7 +6,7 @@ How ABRT works
 When your application crashes, the crash event is handled
 by one of ABRT's language or runtime dependent hooks which forwards
 the crash information to :ref:`abrt daemon <abrtd>`. The daemon stores
-the data in ``/var/tmp/abrt`` and runs a chain of events that
+the data in ``/var/spool/abrt`` and runs a chain of events that
 for example collect more data about the system, produce backtrace
 from core dump or notifies a user. This process is followed by
 automatic or manual reporting to various supported targets like bugzilla

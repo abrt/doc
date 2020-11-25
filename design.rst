@@ -13,14 +13,14 @@ it collects the problem data (core file, application's command line, ...) and ta
 action according to the configuration and the type of application that crashed.
 
 By default it uses inotify interface [#inotify]_ to monitor the dump location
-(``/var/tmp/abrt/``) for new directories created by C/C++ hook and a :ref:`socketapi`
+(``/var/spool/abrt/``) for new directories created by C/C++ hook and a :ref:`socketapi`
 (``/var/run/abrt/abrt.socket``) used by other hooks like :ref:`pyhook`.
 
 The reason for using socket instead of direct filesystem access is security.
 When a Python script throws unhandled exception, :ref:`pyhook` catches it, running
 as a part of the broken Python application. The application is running
 with certain SELinux privileges, for example it can not execute other
-programs, or to create files in ``/var/tmp/abrt`` or anything else required
+programs, or to create files in ``/var/spool/abrt`` or anything else required
 to properly fill a problem directory. Adding these privileges to every
 application would weaken the security.
 The most suitable solution for the Python application is

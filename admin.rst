@@ -96,7 +96,7 @@ Troubleshooting
 If uploading doesn't work make sure it's possible to upload problem directories manually
 by running::
 
-        reporter-upload -vvv -d /var/tmp/abrt/<PROBDIR>
+        reporter-upload -vvv -d /var/spool/abrt/<PROBDIR>
 
 Spacewalk
 ---------
