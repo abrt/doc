@@ -27,68 +27,6 @@ The most suitable solution for the Python application is
 to open a socket where ``abrtd`` is listening, write all relevant
 data to that socket, and close it. ``abrtd`` handles the rest of the processes.
 
-.. _ccpphook:
-
-C/C++ hook
-----------
-
-When C/C++ application crashes kernel uses :ref:`core_pattern` to
-handle the crash. Abrt overrides default core_pattern with a pipe
-to ``abrt-hook-ccpp`` executable that stores core dump in abrt's
-dump location and notifies daemon about new crash. It also stores
-number of files from ``/proc/<PID>/`` that might be useful
-for debugging — ``maps``, ``limits``, ``cgroup``, ``status``.
-Format and meaning of these files is described in the documentation
-of the Linux kernel [#procfs]_.
-
-To enable C/C++ hook use::
-
-        systemctl enable --now abrt-ccpp
-
-.. _core_pattern:
-
-core_pattern
-^^^^^^^^^^^^
-
-Variable used to specify a core dump file name template. If
-the first character of the pattern is ``|``, the kernel will treat
-the rest of the pattern as a command to run.  The core dump will be
-written to the standard input of that program instead of to a file.
-
-By default, ``/proc/sys/kernel/core_pattern`` contains ``core`` string
-and kernel produces ``core.*`` files in crashed process` current directory.
-
-Abrt's C/C++ hook overrides this with::
-
-        |/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t e
-
-which results in kernel calling ``abrt-hook-ccpp``. Detailed description
-can be found in the documentation of the Linux kernel [#corepattern]_.
-
-.. _debuginfo:
-
-debuginfo
-^^^^^^^^^
-
-To be able to get full featured GDB backtrace from a core dump file, debuginfo
-data must be available on the local file system. These data are usually
-provided in the form of installable packages, however, ABRT needs to allow
-non-privileged users to analyze the core dump file and report the
-obtained backtrace to bug tracking tool. Hence, ABRT maintains its own
-debuginfo directory ``/var/cache/abrt-di`` where all users can download and
-unpack the required debuginfo packages through
-``/usr/libexec/abrt-action-install-debuginfo-to-abrt-cache`` command line
-utility.
-
-Upon a new core dump file detection ABRT generates a list of build-ids
-(``XXYYY..YYY``) using ``eu-unstrip -n --core=coredump``. When a user decides to
-report the core dump file, the ABRT debuginfo tool goes through that list and
-remembers those build-ids for which the file ``XX/YYY..YYY.debug`` exists
-either in the system directories (``/usr/lib/debug/.build-id`` or
-``/usr/lib/.build-id``) or in the ABRT debuginfo directory. Finally, packages
-that provide the debug files are looked up in ``*debug*`` repositories,
-downloaded and unpacked to the ABRT debuginfo directory.
-
 .. _pyhook:
 
 Python hook
@@ -221,22 +159,13 @@ Elements dependent on problem type:
 Property              Meaning                                                                Example                                Applicable
 ===================== ====================================================================== ====================================== ===============================
 ``abrt_version``      ABRT version string                                                    ``'2.0.18.84.g211c'``                  Crashes caught by ABRT
-``cgroup``            cgroup (control group) information for crashed process                 ``'9:perf_event:/\n8:blkio:/\n...'``   C/C++
-``core_backtrace``    Machine readable backtrace with no private data                                                               C/C++, Python, Ruby, Kerneloops
-``backtrace``         Original backtrace or backtrace produced by retracing                                                         C/C++ (after retracing), Python, Ruby, Xorg, Kerneloops
+``core_backtrace``    Machine readable backtrace with no private data                                                               Python, Ruby, Kerneloops
+``backtrace``         Original backtrace or backtrace produced by retracing                                                         Python, Ruby, Xorg, Kerneloops
                       process
-``dso_list``          List of dynamic libraries loaded at the time of crash                                                         C/C++, Python
-``exploitable``       Likely crash reason and exploitable rating                                                                    C/C++
-``maps``              Copy of ``/proc/<pid>/maps`` file of the problem executable                                                   C/C++
-``cmdline``           Copy of ``/proc/<pid>/cmdline`` file                                   ``'/usr/bin/gtk-builder-convert'``     C/C++, Python, Ruby, Kerneloops
-``coredump``          Core dump of the crashing process                                                                              C/C++
-``environ``           Runtime environment of the process                                                                            C/C++, Python
-``open_fds``          List of file descriptors open at the time of crash                                                            C/C++
-``pid``               Process ID                                                             ``'42'``                               C/C++, Python, Ruby
-``proc_pid_status``   Copy of ``/proc/<pid>/status`` file                                                                           C/C++
-``limits``            Copy of ``/proc/<pid>/limits`` file                                                                           C/C++
-``var_log_messages``  Part of the ``/var/log/messages`` file which contains crash
-                      information                                                                                                   C/C++
+``dso_list``          List of dynamic libraries loaded at the time of crash                                                         Python
+``cmdline``           Copy of ``/proc/<pid>/cmdline`` file                                   ``'/usr/bin/gtk-builder-convert'``     Python, Ruby, Kerneloops
+``environ``           Runtime environment of the process                                                                            Python
+``pid``               Process ID                                                             ``'42'``                               Python, Ruby
 ``suspend_stats``     Copy of ``/sys/kernel/debug/suspend_stats``                                                                   Kerneloops
 ``reported_to``       If the problem was already reported, this item contains                                                       Reported problems
                       URLs of the services where it was reported
@@ -252,7 +181,6 @@ Supported problem types
 
 Supported values for ``type`` element:
 
-* ``CCpp``
 * ``java``
 * ``Kerneloops``
 * ``selinux``
