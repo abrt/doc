@@ -25,11 +25,7 @@ X.Org Server               abrt-addon-xorg
 C/C++
 ------
 
-ABRT installs its own core dump handler via ``abrt-ccpp.service`` which when started,
-overrides the default value of kernel's :ref:`core_pattern`. This causes
-C/C++ crashes to be handled by ``abrtd`` and by default prevents creation
-of ``core.*`` files in crashed process' current directory. More details available
-in :ref:`ccpphook` design section.
+The C/C++ hook has been replaced by Systemd Coredump
 
 Java
 ----
