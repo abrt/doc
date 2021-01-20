@@ -270,3 +270,32 @@ Set the new `kernel.core_pattern` using `sysctl` (basically, change
     kernel.core_pattern = |/etc/my_abrt_ccpp_hook.sh %s %c %p %u %g %t %e
 
 .. [#corepattern] https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#core-pattern
+
+
+Is it possible to ignore crashes from programs with specific UIDs?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Yes, it is. You can modify files in `/etc/libreport/events.d/` and add
+your own snippets of bash code to them. In event `post-create` (see for example
+`/etc/libreport/events.d/python3_event.conf` for Python 3 crashes or
+`/etc/libreport/events.d/ccpp_event.conf` for C and C++ crashes) you
+have access to contents of `/proc/PID/status` file of the process that
+crashed.
+
+Example how to filter crashes from programs with UIDs lower than 1000 in C
+and C++ programs:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Open  `/etc/libreport/events.d/ccpp_event.conf` and add this snippet in
+the `EVENT=post-create` section:
+
+.. code:: bash
+
+        # Parse Uid from  proc_pid_status
+        uid=`grep '^Uid:' proc_pid_status | sed 's/^Uid:[[:space:]]*\([0-9]*\).*/\1/'`
+        
+        if [ 1000 -lt "$uid" ]; then
+            # If Uid is less then 1000 abrt will remove the problem directory
+            exit 1
+        fi
+
