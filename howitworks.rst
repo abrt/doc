@@ -79,7 +79,7 @@ via different paths like email, bugzilla, ABRT Analytics, scp upload..
 .. _analytics:
 
 ABRT Analytics
-"""
+""""""""""""""
 
 Crash collecting server, also known as ABRT Analytics (or ABRT server in the
 past). Provides accurate statistics of incoming reports and acts as a proxy in
