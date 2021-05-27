@@ -10,12 +10,11 @@ or suggestion to update a package to a version containing a fix.
 Quick links
 """""""""""
 
-* `Git repositories <https://github.com/abrt>`_
-* `Mailing list <http://lists.fedorahosted.org/mailman/listinfo/crash-catcher>`_
+* Source code: `GitHub organization <https://github.com/abrt>`_
+* `ABRT blog <https://abrt.github.io/>`_
 * IRC channel: #abrt @ irc.freenode.net
 * `Fedora problem tracker <https://retrace.fedoraproject.org/faf/summary/>`_
-* `RHEL problem tracker <http://faf-report.redhat.com/summary/>`_
-* `ABRT blog <https://abrt.github.io/>`_
+* `Mailing list <http://lists.fedorahosted.org/mailman/listinfo/crash-catcher>`_
 
 
 Contents
