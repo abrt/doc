@@ -153,4 +153,4 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 watch:
-	while true; do inotifywait -e close_write *.rst; make html; done
+	while true; do inotifywait -e modify *.rst; make html; done
