@@ -10,9 +10,9 @@ or suggestion to update a package to a version containing a fix.
 Quick links
 """""""""""
 
-* Source code: `GitHub organization <https://github.com/abrt>`_
+* Source code: `GitHub <https://github.com/abrt>`_
 * `ABRT blog <https://abrt.github.io/>`_
-* IRC channel: #abrt @ irc.freenode.net
+* IRC channel: #abrt @ `irc.libera.chat <https://libera.chat/>`_
 * `Fedora problem tracker <https://retrace.fedoraproject.org/faf/summary/>`_
 * `Mailing list <http://lists.fedorahosted.org/mailman/listinfo/crash-catcher>`_
 
