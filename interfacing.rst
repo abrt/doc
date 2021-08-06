@@ -24,22 +24,22 @@ The server expects another ``\0`` at the end of the message.
 
 Mandatory keys:
 
-* ``type`` — `(string)` problem type, see :ref:`problemtypes`.
-* ``pid`` — `(integer)` process ID of the crashed procss, ranges from 0 to `PID_MAX`
+* ``type`` — *(string)* problem type, see :ref:`problemtypes`.
+* ``pid`` — *(integer)* process ID of the crashed procss, ranges from 0 to `PID_MAX`
   (``/proc/sys/kernel/pid_max``)
-* ``executable`` — `(string)` path of the affected executable
-* ``backtrace`` — `(string)`
-* ``reason`` — `(string)` reason of the crash
+* ``executable`` — *(string)* path of the affected executable
+* ``backtrace`` — *(string)*
+* ``reason`` — *(string)* reason of the crash
 
 To ensure the problem can be reported to Bugzilla via report-gtk or
 report-cli you have to add the following keys with the following contents:
 
-* ``duphash`` — `(string)` duplicate hash. The hash is placed in Bugzilla's
+* ``duphash`` — *(string)* duplicate hash. The hash is placed in Bugzilla's
   ``Whiteboard`` field in the format ``abrt_hash:$duphash``. For C/C++, the content
   of ``duphash`` is the SHA-1 digest of the concatenation of the names of top six
   functions on the stacktrace. For Python exceptions, it is the SHA-1 digest of the
   stacktrace.
-* ``uuid`` — `(string)` local identifier of the problem. The content can be the same
+* ``uuid`` — *(string)* local identifier of the problem. The content can be the same
   as for ``duphash``.
 
 Optionally, the server accepts other elements listed in :ref:`elements`.
