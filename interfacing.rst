@@ -25,7 +25,8 @@ The server expects another ``\0`` at the end of the message.
 Mandatory keys:
 
 * ``type`` — `(string)` problem type, see :ref:`problemtypes`.
-* ``pid`` — `(integer)` 0 to `PID_MAX` (``/proc/sys/kernel/pid_max``)
+* ``pid`` — `(integer)` process ID of the crashed procss, ranges from 0 to `PID_MAX`
+  (``/proc/sys/kernel/pid_max``)
 * ``executable`` — `(string)` path of the affected executable
 * ``backtrace`` — `(string)`
 * ``reason`` — `(string)` reason of the crash
