@@ -170,5 +170,5 @@ too.
 Default configuration files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- initial bug formatting: https://github.com/abrt/libreport/blob/master/src/plugins/bugzilla_format.conf
-- additional bug comments formatting: https://github.com/abrt/libreport/blob/master/src/plugins/bugzilla_formatdup.conf
+- Initial bug formatting: https://github.com/abrt/libreport/blob/master/src/plugins/bugzilla_format.conf
+- Additional bug comments formatting: https://github.com/abrt/libreport/blob/master/src/plugins/bugzilla_formatdup.conf
